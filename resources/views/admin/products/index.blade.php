@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <h1>All Categories</h1>
+    <h1>All Products</h1>
         @if (session('msg'))
             <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
                 {{ session('msg') }}
@@ -22,18 +22,31 @@
         <tr class="bg-dark text-white">
             <th>ID</th>
             <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Album</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Serial Number</th>
             <th>Created At</th>
-            <th>Actions</th>
+            <th>Updated At</th>
         </tr>
-        @forelse ($categories as $category)
+        @forelse ($products as $product)
             <tr>
                 {{-- <td>{{ $category->id }}</td> --}}
                 <td>{{ $loop->iteration }}</td> <!--For showing ordered Numbers in ID collumn -->
-                <td>{{ $category->name }}</td>
-                <td>{{ $category->created_at }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->price }}</td>
+                <td>{{ $product->image }}</td>
+                <td>{{ $product->album }}</td>
+                <td>{{ $product->description }}</td>
+                <td>{{ $product->quantity }}</td>
+                <td>{{ $product->serial_number }}</td>
+                <td>{{ $product->created_at }}</td>
+                <td>{{ $product->updated_at }}</td>
                 <td>
-                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                    <form class="d-inline" action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
+                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <form class="d-inline" action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
                         @csrf
                         @method('delete')
                         <button onclick="return confirm('Are You sure?')" class="btn btn-danger btn-sm">Delete</button>
@@ -41,7 +54,7 @@
                     </td>
             </tr>
         @empty
-            <td colspan="4" style="text-align:center">No Categories Found</td>
+            <td colspan="10" style="text-align:center">No Products Found</td>
         @endforelse
         {{-- {{ $categories->links() }} --}}
         </table>

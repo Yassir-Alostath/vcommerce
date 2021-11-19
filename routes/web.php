@@ -25,6 +25,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
     Route::Resource('products', ProductController::class); //admin.products.index
     Route::Resource('discounts', DiscountController::class); //admin.discounts.index
     Route::delete('delete_all', [CategoryController::class, 'delete_all'])->name('delete_all');
+    Route::delete('delete_all', [ProductController::class, 'delete_all'])->name('delete_all');
 });
 /*
 ** The source Route does the following Routes  **

@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all(); //select * from Category table
+        $categories = Category::all();     //select * from Category table
         return view ('admin.categories.index', compact('categories'));
     }
 
@@ -43,10 +43,11 @@ class CategoryController extends Controller
         // category::create($request->all());
         //Validation
         Validator::make($request->all(),[
-            'name'=>'required|unique:categories,name|string'
+            'name'=>'required|unique:categories,name|regex:/^[a-zA-Z ]+$/'
             ], [
             'name.required'=>'Category name is required',
-            'name.unique:categories,name'=>'Category name has already been token'
+            'name.unique:categories,name'=>'Category name has already been token',
+            'name.regex:/^[a-zA-Z ]+$/'=>'Category name must be text'
             ])->validate();
 
         //Create (Storing data from form to the table in database)
@@ -95,11 +96,21 @@ class CategoryController extends Controller
     {
         $categories = Category::findOrFail($id);
         // $categories = update($request->except('_token', 'image'));
-        $categories->update($request->except('_token', 'image'));
 
-        return redirect()->route('admin.categories.index')
-        ->with('msg', 'Categoy Edited Successfully')
-        ->with('type', 'success');
+        // $request->validate([
+        //     'name'=>'required|string|unique:categories,name'
+        // ]);
+        Validator::make($request->all(),[
+            'name'=>'required|unique:categories,name'
+            ], [
+            'name.required'=>'Category name is required',
+            'name.unique:categories,name'=>'Category name has already been token',
+            // 'name.regex:/^[a-zA-Z ]+$/'=>'Category name must be text'
+            ])->validate();
+            $categories->update($request->except('_token', 'image'));
+            return redirect()->route('admin.categories.index')
+            ->with('msg', 'Categoy Edited Successfully')
+            ->with('type', 'success');
     }
 
     /**
