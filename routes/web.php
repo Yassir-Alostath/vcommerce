@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
 
 /*
@@ -19,10 +20,11 @@ use App\Http\Controllers\Admin\DashboardController;
 
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function (){
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::Resource('categories', CategoryController::class); //admin.categories.index
     Route::Resource('products', ProductController::class); //admin.products.index
     Route::Resource('discounts', DiscountController::class); //admin.discounts.index
+    Route::delete('delete_all', [CategoryController::class, 'delete_all'])->name('delete_all');
 });
 /*
 ** The source Route does the following Routes  **

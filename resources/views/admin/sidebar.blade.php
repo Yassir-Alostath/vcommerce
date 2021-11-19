@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('admin.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -33,7 +33,7 @@
         <div id="Categories" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route ('admin.categories.index') }}">All Categories</a>
-                <a class="collapse-item" href="cards.html">Add New</a>
+                <a class="collapse-item" href="{{ route('admin.categories.create') }}">Add New</a>
             </div>
         </div>
     </li>
@@ -48,7 +48,7 @@
         <div id="Products" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.products.index') }}">All Products</a>
-                <a class="collapse-item" href="cards.html">Add New</a>
+                <a class="collapse-item" href="{{ route('admin.products.create') }}">Add New</a>
             </div>
         </div>
     </li>
@@ -63,7 +63,7 @@
         <div id="Discounts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.products.index') }}">All Discounts</a>
-                <a class="collapse-item" href="cards.html">Add New</a>
+                <a class="collapse-item" href="{{ route('admin.discounts.create') }}">Add New</a>
             </div>
         </div>
     </li>
